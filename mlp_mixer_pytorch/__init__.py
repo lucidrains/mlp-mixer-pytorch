@@ -1,0 +1,1 @@
+from mlp_mixer_pytorch.mlp_mixer_pytorch import MLPMixer
