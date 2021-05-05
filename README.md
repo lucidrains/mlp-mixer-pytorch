@@ -2,7 +2,7 @@
 
 ## MLP Mixer - Pytorch
 
-An All-MLP solution for Vision, from Google AI, in Pytorch.
+An <a href="https://arxiv.org/abs/2105.01601">All-MLP solution</a> for Vision, from Google AI, in Pytorch.
 
 No convolutions nor attention needed!
 
