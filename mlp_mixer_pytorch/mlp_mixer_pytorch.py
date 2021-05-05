@@ -10,14 +10,16 @@ class PreNormResidual(nn.Module):
     def forward(self, x):
         return self.fn(self.norm(x)) + x
 
-def FeedForward(dim, expansion_factor = 4):
+def FeedForward(dim, expansion_factor = 4, dropout = 0.):
     return nn.Sequential(
         nn.Linear(dim, dim * expansion_factor),
         nn.GELU(),
-        nn.Linear(dim * expansion_factor, dim)
+        nn.Dropout(dropout),
+        nn.Linear(dim * expansion_factor, dim),
+        nn.Dropout(dropout)
     )
 
-def MLPMixer(*, image_size, patch_size, dim, depth, num_classes, expansion_factor = 4):
+def MLPMixer(*, image_size, patch_size, dim, depth, num_classes, expansion_factor = 4, dropout = 0.):
     assert (image_size % patch_size) == 0, 'image must be divisible by patch size'
     num_patches = (image_size // patch_size) ** 2
 
@@ -27,10 +29,10 @@ def MLPMixer(*, image_size, patch_size, dim, depth, num_classes, expansion_facto
         *[nn.Sequential(
             PreNormResidual(dim, nn.Sequential(
                 Rearrange('b n c -> b c n'),
-                FeedForward(num_patches, expansion_factor),
+                FeedForward(num_patches, expansion_factor, dropout),
                 Rearrange('b c n -> b n c'),
             )),
-            PreNormResidual(dim, FeedForward(dim, expansion_factor))
+            PreNormResidual(dim, FeedForward(dim, expansion_factor, dropout))
         ) for _ in range(depth)],
         nn.LayerNorm(dim),
         Rearrange('b n c -> b c n'),

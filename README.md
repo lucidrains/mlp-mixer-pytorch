@@ -1,3 +1,5 @@
+<img src="./images/mlp-mixer.png" width="500px"></img>
+
 ## MLP Mixer - Pytorch
 
 An All-MLP solution for Vision, from Google AI, in Pytorch.
