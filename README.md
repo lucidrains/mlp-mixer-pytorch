@@ -6,6 +6,8 @@ An <a href="https://arxiv.org/abs/2105.01601">All-MLP solution</a> for Vision, f
 
 No convolutions nor attention needed!
 
+<a href="https://youtu.be/7K4Z8RqjWIk">Yannic Kilcher video</a>
+
 ## Install
 
 ```bash
