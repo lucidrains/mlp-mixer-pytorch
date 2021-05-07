@@ -1,6 +1,6 @@
 from torch import nn
 from functools import partial
-from einops.layers.torch import Rearrange
+from einops.layers.torch import Rearrange, Reduce
 
 class PreNormResidual(nn.Module):
     def __init__(self, dim, fn):
@@ -33,8 +33,6 @@ def MLPMixer(*, image_size, patch_size, dim, depth, num_classes, expansion_facto
             PreNormResidual(dim, FeedForward(dim, expansion_factor, dropout, chan_last))
         ) for _ in range(depth)],
         nn.LayerNorm(dim),
-        Rearrange('b n c -> b c n'),
-        nn.AdaptiveAvgPool1d(1),
-        Rearrange('b c () -> b c'),
+        Reduce('b n c -> b c', 'mean),
         nn.Linear(dim, num_classes)
     )
