@@ -22,6 +22,7 @@ from mlp_mixer_pytorch import MLPMixer
 
 model = MLPMixer(
     image_size = 256,
+    channels = 3,
     patch_size = 16,
     dim = 512,
     depth = 12,
