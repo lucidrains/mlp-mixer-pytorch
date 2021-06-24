@@ -45,3 +45,14 @@ pred = model(img) # (1, 1000)
     primaryClass = {cs.CV}
 }
 ```
+
+```bibtex
+@misc{hou2021vision,
+    title   = {Vision Permutator: A Permutable MLP-Like Architecture for Visual Recognition},
+    author  = {Qibin Hou and Zihang Jiang and Li Yuan and Ming-Ming Cheng and Shuicheng Yan and Jiashi Feng},
+    year    = {2021},
+    eprint  = {2106.12368},
+    archivePrefix = {arXiv},
+    primaryClass = {cs.CV}
+}
+```
