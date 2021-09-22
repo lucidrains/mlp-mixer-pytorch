@@ -21,15 +21,15 @@ import torch
 from mlp_mixer_pytorch import MLPMixer
 
 model = MLPMixer(
-    image_size = 256,
+    image_size = (256, 49),
     channels = 3,
-    patch_size = 16,
+    patch_size = (16, 7),
     dim = 512,
     depth = 12,
     num_classes = 1000
 )
 
-img = torch.randn(1, 3, 256, 256)
+img = torch.randn(1, 3, 256, 49)
 pred = model(img) # (1, 1000)
 ```
 
