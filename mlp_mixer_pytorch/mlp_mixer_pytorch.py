@@ -21,13 +21,13 @@ def FeedForward(dim, expansion_factor = 4, dropout = 0., dense = nn.Linear):
     )
 
 def MLPMixer(*, image_size, channels, patch_size, dim, depth, num_classes, expansion_factor = 4, dropout = 0.):
-    assert (image_size % patch_size) == 0, 'image must be divisible by patch size'
-    num_patches = (image_size // patch_size) ** 2
+    assert (image_size[0] % patch_size[0]) == 0 and (image_size[1] % patch_size[1]), 'image must be divisible by patch size'
+    num_patches = (image_size[0] // patch_size[0]) * (image_size[1] // patch_size[1])
     chan_first, chan_last = partial(nn.Conv1d, kernel_size = 1), nn.Linear
 
     return nn.Sequential(
-        Rearrange('b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = patch_size, p2 = patch_size),
-        nn.Linear((patch_size ** 2) * channels, dim),
+        Rearrange('b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = patch_size[0], p2 = patch_size[1]),
+        nn.Linear((patch_size[0] * patch_size[1]) * channels, dim),
         *[nn.Sequential(
             PreNormResidual(dim, FeedForward(num_patches, expansion_factor, dropout, chan_first)),
             PreNormResidual(dim, FeedForward(dim, expansion_factor, dropout, chan_last))
