@@ -21,7 +21,7 @@ def FeedForward(dim, expansion_factor = 4, dropout = 0., dense = nn.Linear):
     )
 
 def MLPMixer(*, image_size, channels, patch_size, dim, depth, num_classes, expansion_factor = 4, dropout = 0.):
-    assert (image_size[0] % patch_size[0]) == 0 and (image_size[1] % patch_size[1]), 'image must be divisible by patch size'
+    assert (image_size[0] % patch_size[0]) == 0 and (image_size[1] % patch_size[1]) == 0, 'image must be divisible by patch size'
     num_patches = (image_size[0] // patch_size[0]) * (image_size[1] // patch_size[1])
     chan_first, chan_last = partial(nn.Conv1d, kernel_size = 1), nn.Linear
 
