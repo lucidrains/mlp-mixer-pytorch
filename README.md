@@ -33,6 +33,25 @@ img = torch.randn(1, 3, 256, 256)
 pred = model(img) # (1, 1000)
 ```
 
+Rectangular image
+
+```python
+import torch
+from mlp_mixer_pytorch import MLPMixer
+
+model = MLPMixer(
+    image_size = (256, 128),
+    channels = 3,
+    patch_size = 16,
+    dim = 512,
+    depth = 12,
+    num_classes = 1000
+)
+
+img = torch.randn(1, 3, 256, 128)
+pred = model(img) # (1, 1000)
+```
+
 ## Citations
 
 ```bibtex
