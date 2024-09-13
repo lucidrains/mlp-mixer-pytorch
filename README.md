@@ -52,6 +52,27 @@ img = torch.randn(1, 3, 256, 128)
 pred = model(img) # (1, 1000)
 ```
 
+Video
+
+```python
+import torch
+from mlp_mixer_pytorch import MLPMixer3D
+
+model = MLPMixer3D(
+    image_size = (256, 128),
+    time_size = 4,
+    time_patch_size = 2,
+    channels = 3,
+    patch_size = 16,
+    dim = 512,
+    depth = 12,
+    num_classes = 1000
+)
+
+video = torch.randn(1, 3, 4, 256, 128)
+pred = model(video) # (1, 1000)
+```
+
 ## Citations
 
 ```bibtex
