@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
   name = 'mlp-mixer-pytorch',
   packages = find_packages(exclude=[]),
-  version = '0.1.1',
+  version = '0.2.0',
   license='MIT',
   description = 'MLP Mixer - Pytorch',
   author = 'Phil Wang',
@@ -15,8 +15,8 @@ setup(
     'image recognition'
   ],
   install_requires=[
-    'einops>=0.3',
-    'torch>=1.6'
+    'einops>=0.8',
+    'torch>=2.0'
   ],
   classifiers=[
     'Development Status :: 4 - Beta',
