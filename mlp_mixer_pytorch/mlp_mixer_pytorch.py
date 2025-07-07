@@ -32,8 +32,8 @@ def MLPMixer(*, image_size, channels, patch_size, dim, depth, num_classes, expan
         Rearrange('b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = patch_size, p2 = patch_size),
         nn.Linear((patch_size ** 2) * channels, dim),
         *[nn.Sequential(
-            PreNormResidual(dim, FeedForward(num_patches, expansion_factor * dim, dropout, chan_first)),
-            PreNormResidual(dim, FeedForward(dim, expansion_factor_token * dim, dropout, chan_last))
+            PreNormResidual(dim, FeedForward(num_patches, int(expansion_factor * dim), dropout, chan_first)),
+            PreNormResidual(dim, FeedForward(dim, int(expansion_factor_token * dim), dropout, chan_last))
         ) for _ in range(depth)],
         nn.LayerNorm(dim),
         Reduce('b n c -> b c', 'mean'),
